@@ -8,7 +8,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-public class CalculatorGUI extends JFrame {
+public class CalculatorGUI extends JFrame implements Calculate{
 
     private JFrame mainFrame;
     private JPanel controlPanel;
@@ -19,6 +19,18 @@ public class CalculatorGUI extends JFrame {
         createCalculatorButtons();
     }
 
+    public void calculateNow(){
+        String global = mainText.getText();
+        ScriptEngineManager mgr = new ScriptEngineManager();
+        ScriptEngine engine = mgr.getEngineByName("JavaScript");
+        try {
+                String s = engine.eval(global).toString();
+                mainText.setText(s);
+            } catch (ScriptException e1) {
+                e1.printStackTrace();
+            }
+    }
+    
     private void addToCalculationString(String whatToAdd){
         String global = mainText.getText();
         global = global.concat(whatToAdd);
@@ -218,15 +230,7 @@ public class CalculatorGUI extends JFrame {
         nequal.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
-                String global = mainText.getText();
-                ScriptEngineManager mgr = new ScriptEngineManager();
-                ScriptEngine engine = mgr.getEngineByName("JavaScript");
-                try {
-                        String s = engine.eval(global).toString();
-                        mainText.setText(s);
-                    } catch (ScriptException e1) {
-                        e1.printStackTrace();
-                    }
+                calculateNow();
             }
         });        
         
