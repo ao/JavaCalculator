@@ -165,7 +165,14 @@ public class CalculatorGUI extends JFrame {
                 addToCalculationString(n9.getText());
             }
         });
-   
+
+        n0.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                addToCalculationString(n0.getText());
+            }
+        });
+                
         ndiv.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
