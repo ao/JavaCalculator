@@ -65,7 +65,7 @@ public class CalculatorGUI extends JFrame implements Calculate {
     public void renderWindowComponents() {
         mainFrame = new JFrame("Calculator");
         mainFrame.setSize(400,400);
-        mainFrame.setLayout(new GridLayout(3, 1));
+        mainFrame.setLayout(new GridLayout(2, 1));
 
         mainFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
