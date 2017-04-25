@@ -70,13 +70,14 @@ public class CalculatorGUI extends JFrame implements Calculate{
          */
         // ^ what other buttons do we need in the initial copy?
         // ^ we can add the fibonacci etc. later
+        
         Container mainCalcContainer = mainFrame.getContentPane();
         mainText = new JTextField(100);
         Font myFontSize = mainText.getFont().deriveFont(Font.BOLD,50f);
         mainText.setFont(myFontSize);
         mainCalcContainer.add(mainText,BorderLayout.NORTH);
 
-        //Define each jButton
+//Define each jButton
         final JButton  n1 =  new JButton("1");
         final JButton  n2 =  new JButton("2");
         final JButton  n3 =  new JButton("3");
@@ -94,8 +95,9 @@ public class CalculatorGUI extends JFrame implements Calculate{
         final JButton  nequal =  new JButton("=");
         final JButton  nminus =  new JButton("-");
         final JButton  nclear =  new JButton("C");
+        final JButton  nfibonacci =  new JButton("FIB");
         
-        //Add all buttons to the jPanel
+//Add all buttons to the jPanel
         controlPanel.add(n7);
         controlPanel.add(n8);
         controlPanel.add(n9);
@@ -113,7 +115,9 @@ public class CalculatorGUI extends JFrame implements Calculate{
         controlPanel.add(nequal);
         controlPanel.add(nminus);
         controlPanel.add(nclear);
-
+        controlPanel.add(nfibonacci);
+        
+// Add ActionListener events to all the buttons
         n1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
