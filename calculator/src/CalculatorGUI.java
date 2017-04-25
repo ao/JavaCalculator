@@ -12,12 +12,19 @@ public class CalculatorGUI extends JFrame {
 
     private JFrame mainFrame;
     private JPanel controlPanel;
-
+    private JTextField mainText;
+    
     public CalculatorGUI() {
         renderWindowComponents();
         createCalculatorButtons();
     }
 
+    private void addToCalculationString(String whatToAdd){
+        String global = mainText.getText();
+        global = global.concat(whatToAdd);
+        mainText.setText(global);        
+    }
+    
     public void renderWindowComponents() {
         mainFrame = new JFrame("Calculator");
         mainFrame.setSize(400,400);
@@ -52,7 +59,7 @@ public class CalculatorGUI extends JFrame {
         // ^ what other buttons do we need in the initial copy?
         // ^ we can add the fibonacci etc. later
         Container mainCalcContainer = mainFrame.getContentPane();
-        final JTextField mainText = new JTextField(100);
+        mainText = new JTextField(100);
         Font myFontSize = mainText.getFont().deriveFont(Font.BOLD,50f);
         mainText.setFont(myFontSize);
         mainCalcContainer.add(mainText,BorderLayout.NORTH);
@@ -74,6 +81,7 @@ public class CalculatorGUI extends JFrame {
         final JButton  n0 =  new JButton("0");
         final JButton  nequal =  new JButton("=");
         final JButton  nminus =  new JButton("-");
+        final JButton  nclear =  new JButton("C");
         
         //Add all buttons to the jPanel
         controlPanel.add(n7);
@@ -92,29 +100,116 @@ public class CalculatorGUI extends JFrame {
         controlPanel.add(n0);
         controlPanel.add(nequal);
         controlPanel.add(nminus);
+        controlPanel.add(nclear);
 
         n1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
-                String myText = n1.getText();
-                String global = mainText.getText();
-                global = global.concat(myText);
-                mainText.setText(global);
+                addToCalculationString(n1.getText());
+            }
+        });
+   
+        n2.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                addToCalculationString(n2.getText());
+            }
+        });
+
+   
+        n3.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                addToCalculationString(n3.getText());
+            }
+        });
+   
+        n4.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                addToCalculationString(n4.getText());
+            }
+        });
+   
+        n5.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                addToCalculationString(n5.getText());
+            }
+        });
+   
+        n6.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                addToCalculationString(n6.getText());
+            }
+        });
+   
+        n7.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                addToCalculationString(n7.getText());
+            }
+        });
+   
+        n8.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                addToCalculationString(n8.getText());
+            }
+        });
+   
+        n9.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                addToCalculationString(n9.getText());
+            }
+        });
+   
+        ndiv.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                addToCalculationString(ndiv.getText());
+            }
+        });
+   
+        nmult.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                addToCalculationString(nmult.getText());
+            }
+        });
+   
+        nminus.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                addToCalculationString(nminus.getText());
+            }
+        });
+        
+        ndot.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                addToCalculationString(ndot.getText());
             }
         });
         
         nplus.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e)
             {
-                String myText = nplus.getText();
-                String global = mainText.getText();
-                global = global.concat(myText);
-                mainText.setText(global);
+                addToCalculationString(nplus.getText());
             }
         });      
 
+        nclear.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                mainText.setText("");
+            }
+        }); 
+        
         nequal.addActionListener(new ActionListener(){
-        public void actionPerformed(ActionEvent e)
+            public void actionPerformed(ActionEvent e)
             {
                 String global = mainText.getText();
                 ScriptEngineManager mgr = new ScriptEngineManager();
