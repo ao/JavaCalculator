@@ -8,9 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
@@ -18,13 +15,15 @@ import java.util.Random;
 /**
  * Draw Calculator GUI
  */
-public class CalculatorGUI extends JFrame implements Calculate {
+public class CalculatorGUI extends JFrame {
 
     private JFrame mainFrame;
     private JPanel controlPanel;
     private JTextField mainText;
 
     private Container mainCalcContainer;
+
+    private CalculationEngine engine;
 
     private JButton n1;
     private JButton n2;
@@ -50,26 +49,14 @@ public class CalculatorGUI extends JFrame implements Calculate {
      * Constructor to control flow
      */
     public CalculatorGUI() {
+        engine = new CalculationEngine();
         renderWindowComponents();
         createCalculatorButtons();
         addButtonsEventHandlers();
         addKeyboardListeners();
     }
 
-    /**
-     * Use the ScriptEngineManager to power the Calculator
-     */
-    public void calculateNow(){
-        String global = mainText.getText();
-        ScriptEngineManager mgr = new ScriptEngineManager();
-        ScriptEngine engine = mgr.getEngineByName("JavaScript");
-        try {
-            String s = engine.eval(global).toString();
-            mainText.setText(s);
-        } catch (ScriptException e1) {
-            e1.printStackTrace();
-        }
-    }
+
 
     /**
      * Add to the Calculator display
@@ -292,7 +279,7 @@ public class CalculatorGUI extends JFrame implements Calculate {
         
         nequal.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                calculateNow();
+                engine.calculateNow(mainText);
             }
         });
 
