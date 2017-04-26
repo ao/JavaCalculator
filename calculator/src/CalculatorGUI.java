@@ -1,3 +1,7 @@
+/**
+ * CalculatorGUI class
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,7 +13,11 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
+/**
+ * Draw Calculator GUI
+ */
 public class CalculatorGUI extends JFrame implements Calculate {
 
     private JFrame mainFrame;
@@ -36,7 +44,11 @@ public class CalculatorGUI extends JFrame implements Calculate {
     private JButton nminus;
     private JButton nclear;
     private JButton nfibonacci;
+    private JButton nrand;
 
+    /**
+     * Constructor to control flow
+     */
     public CalculatorGUI() {
         renderWindowComponents();
         createCalculatorButtons();
@@ -44,6 +56,9 @@ public class CalculatorGUI extends JFrame implements Calculate {
         addKeyboardListeners();
     }
 
+    /**
+     * Use the ScriptEngineManager to power the Calculator
+     */
     public void calculateNow(){
         String global = mainText.getText();
         ScriptEngineManager mgr = new ScriptEngineManager();
@@ -55,13 +70,20 @@ public class CalculatorGUI extends JFrame implements Calculate {
             e1.printStackTrace();
         }
     }
-    
+
+    /**
+     * Add to the Calculator display
+     * @param whatToAdd
+     */
     private void addToCalculationString(String whatToAdd){
         String global = mainText.getText();
         global = global.concat(whatToAdd);
         mainText.setText(global);        
     }
-    
+
+    /**
+     * Render Window Components
+     */
     public void renderWindowComponents() {
         mainFrame = new JFrame("Calculator");
         mainFrame.setSize(400,400);
@@ -80,6 +102,9 @@ public class CalculatorGUI extends JFrame implements Calculate {
         mainFrame.setVisible(true);
     }
 
+    /**
+     * Create all the Buttons for the Calculator
+     */
     public void createCalculatorButtons() {
         /**
          +---------------------+
@@ -118,6 +143,7 @@ public class CalculatorGUI extends JFrame implements Calculate {
         nminus = new JButton("-");
         nclear = new JButton("C");
         nfibonacci = new JButton("FIB");
+        nrand = new JButton("Rand()");
 
         // Add all buttons to the jPanel
         controlPanel.add(n7);
@@ -138,6 +164,28 @@ public class CalculatorGUI extends JFrame implements Calculate {
         controlPanel.add(nminus);
         controlPanel.add(nclear);
         controlPanel.add(nfibonacci);
+        controlPanel.add(nrand);
+
+        //Remove focus so we don't break the keyboard listener
+        n1.setFocusable(false);
+        n2.setFocusable(false);
+        n3.setFocusable(false);
+        n4.setFocusable(false);
+        n5.setFocusable(false);
+        n6.setFocusable(false);
+        n7.setFocusable(false);
+        n8.setFocusable(false);
+        n9.setFocusable(false);
+        ndiv.setFocusable(false);
+        nmult.setFocusable(false);
+        nplus.setFocusable(false);
+        ndot.setFocusable(false);
+        n0.setFocusable(false);
+        nequal.setFocusable(false);
+        nminus.setFocusable(false);
+        nclear.setFocusable(false);
+        nfibonacci.setFocusable(false);
+        nrand.setFocusable(false);
 
     }
 
@@ -246,14 +294,25 @@ public class CalculatorGUI extends JFrame implements Calculate {
             public void actionPerformed(ActionEvent e) {
                 calculateNow();
             }
-        });        
-        
+        });
+
+        nrand.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int max = 99;
+                int min = 1;
+                Random random = new Random();
+                int randomNumber = random.nextInt(max - min + 1) + min;
+                addToCalculationString( String.valueOf(randomNumber) );
+            }
+        });
+
         mainCalcContainer.add(controlPanel,BorderLayout.CENTER);
         mainFrame.setVisible(true);
     }
 
     /**
-     * addKeyboardListeners
+     * add Keyboard Listeners to all the buttons (and a clear)
      */
     private void addKeyboardListeners() {
         mainFrame.addKeyListener(new KeyListener(){
@@ -321,14 +380,17 @@ public class CalculatorGUI extends JFrame implements Calculate {
 
             }
 
+            /**
+             * We keep these overrides here (for now) to make the KeyListener above happy
+             * @param e
+             */
             @Override
             public void keyTyped(KeyEvent e) {
-//                throw new UnsupportedOperationException("Not supported yet.");
+            //    throw new UnsupportedOperationException("Not supported yet.");
             }
-
             @Override
             public void keyReleased(KeyEvent e) {
-//                throw new UnsupportedOperationException("Not supported yet.");
+            //      throw new UnsupportedOperationException("Not supported yet.");
             }
         });
     }
