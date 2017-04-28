@@ -100,8 +100,6 @@ public class CalculatorGUI extends JFrame {
 
         controlPanel = new JPanel();
         controlPanel.setLayout(new GridLayout(0,4));
-        controlPanel = new JPanel();
-        controlPanel.setLayout(new GridLayout(0,4));
         mainFrame.add(controlPanel);
         mainFrame.setVisible(true);
     }
