@@ -4,12 +4,7 @@
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.util.Random;
 
 /**
@@ -72,6 +67,7 @@ public class CalculatorGUI extends JFrame {
      * @param whatToAdd
      */
     private void addToCalculationString(String whatToAdd){
+        //TODO: Need to split this up into a list so that we can re-use it with the History code.
         String global = mainText.getText();
         global = global.concat(whatToAdd);
         mainText.setText(global);        
@@ -312,6 +308,25 @@ public class CalculatorGUI extends JFrame {
 
         mainCalcContainer.add(controlPanel,BorderLayout.CENTER);
         mainFrame.setVisible(true);
+
+        lshist.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                JList list = (JList)evt.getSource();
+                if (evt.getClickCount() == 2) {
+                    // Double-click detected
+                    int index = list.locationToIndex(evt.getPoint());
+                    loadFromHistoryItem(index);
+                } else if (evt.getClickCount() == 3) {
+                    // Triple-click detected
+                    int index = list.locationToIndex(evt.getPoint());
+                    loadFromHistoryItem(index);
+                }
+            }
+        });
+    }
+
+    private void loadFromHistoryItem(int index) {
+        mainText.setText( hist.getEntry(index) );
     }
 
     /**

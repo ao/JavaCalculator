@@ -30,9 +30,13 @@ public class History {
         p = _p;
     }
 
-    public void addToHistory(String str) {
+    public void addToHistory(String... strings) {
+
+        String str = String.join(",", strings);
+
         data.add(str);
-        ((DefaultListModel)p.getModel()).addElement(str);
+
+        ((DefaultListModel)p.getModel()).addElement( str.replace(",", "=") );
 
         try {
             writeToDataFile();
@@ -48,8 +52,18 @@ public class History {
             e.printStackTrace();
         }
         for (String str: data) {
-            ((DefaultListModel)p.getModel()).addElement(str);
+            ((DefaultListModel)p.getModel()).addElement( str.replace(",", "=") );
         }
+    }
+
+    public String getEntry(int index) {
+        if (data.size()>=index) {
+            String dataItem = data.get(index);
+            int iend = dataItem.indexOf(",");
+            if (iend != -1) return dataItem.substring(0 , iend);
+            else return dataItem;
+        } else
+            return "";
     }
 
     public void openDataFile() throws IOException {

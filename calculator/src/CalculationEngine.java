@@ -26,7 +26,7 @@ public class CalculationEngine implements Calculate {
             String s = engine.eval(global).toString();
             mainText.setText(s);
 
-            hist.addToHistory(global+"="+s);
+            hist.addToHistory(global,s);
 
         } catch (ScriptException e1) {
             e1.printStackTrace();
