@@ -17,6 +17,7 @@ import java.util.Random;
  */
 public class CalculatorGUI extends JFrame {
 
+    private History hist;
     private JFrame mainFrame;
     private JPanel controlPanel;
     private JTextField mainText;
@@ -45,17 +46,23 @@ public class CalculatorGUI extends JFrame {
     private JButton nfibonacci;
     private JButton nrand;
 
+    private DefaultListModel model = new DefaultListModel();
+    private JList lshist = new JList( model );
+
     /**
      * Constructor to control flow
      */
-    public CalculatorGUI() {
-        engine = new CalculationEngine();
+    public CalculatorGUI(History _hist) {
+        hist = _hist;
+        _hist.lsPointer(model, lshist);
+
+        engine = new CalculationEngine(_hist);
+
         renderWindowComponents();
         createCalculatorButtons();
         addButtonsEventHandlers();
         addKeyboardListeners();
     }
-
 
 
     /**
@@ -106,10 +113,13 @@ public class CalculatorGUI extends JFrame {
          */
 
         mainCalcContainer = mainFrame.getContentPane();
+
         mainText = new JTextField(100);
         Font myFontSize = mainText.getFont().deriveFont(Font.BOLD, 50f);
         mainText.setFont(myFontSize);
         mainCalcContainer.add(mainText, BorderLayout.NORTH);
+
+        mainCalcContainer.add(lshist, BorderLayout.EAST);
 
         // Initialise each jButton
         n1 = new JButton("1");
@@ -131,6 +141,8 @@ public class CalculatorGUI extends JFrame {
         nclear = new JButton("C");
         nfibonacci = new JButton("FIB");
         nrand = new JButton("Rand()");
+
+
 
         // Add all buttons to the jPanel
         controlPanel.add(n7);
@@ -280,8 +292,10 @@ public class CalculatorGUI extends JFrame {
         nequal.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 engine.calculateNow(mainText);
+
             }
         });
+
 
         nrand.addActionListener(new ActionListener() {
             @Override

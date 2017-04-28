@@ -8,9 +8,11 @@
 
 public class Calculator {
     public CalculatorGUI cgui;
+    public History hist;
 
     public Calculator() {
-        cgui = new CalculatorGUI();
+        hist = new History();
+        cgui = new CalculatorGUI(hist);
     }
 
     /**
