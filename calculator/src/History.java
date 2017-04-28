@@ -19,6 +19,7 @@ public class History {
     private DefaultListModel<String> m;
     private JList<String> p;
     private List<String> data = new ArrayList<String>() {};
+    private String historyFile = "history.dat";
 
     public void History() {
 
@@ -53,7 +54,7 @@ public class History {
 
     public void openDataFile() throws IOException {
         try {
-            data = Files.readAllLines(Paths.get("history.dat"));
+            data = Files.readAllLines(Paths.get(historyFile));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -61,7 +62,7 @@ public class History {
 
     public void writeToDataFile() throws IOException {
         try {
-            Files.write(Paths.get("history.dat"), data);
+            Files.write(Paths.get(historyFile), data);
         } catch (IOException e) {
             e.printStackTrace();
         }
