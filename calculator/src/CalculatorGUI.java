@@ -15,6 +15,7 @@ public class CalculatorGUI extends JFrame {
     private History hist;
     private JFrame mainFrame;
     private JPanel controlPanel;
+    private JPanel histPanel;
     private JTextField mainText;
 
     private Container mainCalcContainer;
@@ -41,6 +42,8 @@ public class CalculatorGUI extends JFrame {
     private JButton nfibonacci;
     private JButton nrand;
 
+    private JButton histclear;
+
     private DefaultListModel model = new DefaultListModel();
     private JList lshist = new JList( model );
 
@@ -48,6 +51,14 @@ public class CalculatorGUI extends JFrame {
      * Constructor to control flow
      */
     public CalculatorGUI(History _hist) {
+        super("Calculator");
+
+        // take the menu bar off the jframe
+//        System.setProperty("apple.laf.useScreenMenuBar", "true");
+
+        // set the name of the application menu item
+//        System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Calculator");
+
         hist = _hist;
         _hist.setPointers(model, lshist);
 
@@ -88,7 +99,8 @@ public class CalculatorGUI extends JFrame {
         });
 
         controlPanel = new JPanel();
-        //controlPanel.setLayout(new FlowLayout());
+        controlPanel.setLayout(new GridLayout(0,4));
+        controlPanel = new JPanel();
         controlPanel.setLayout(new GridLayout(0,4));
         mainFrame.add(controlPanel);
         mainFrame.setVisible(true);
@@ -115,9 +127,9 @@ public class CalculatorGUI extends JFrame {
         mainText = new JTextField(100);
         Font myFontSize = mainText.getFont().deriveFont(Font.BOLD, 50f);
         mainText.setFont(myFontSize);
-        mainCalcContainer.add(mainText, BorderLayout.NORTH);
 
         mainCalcContainer.add(lshist, BorderLayout.EAST);
+        mainCalcContainer.add(mainText, BorderLayout.NORTH);
 
         // Initialise each jButton
         n1 = new JButton("1");
@@ -139,6 +151,8 @@ public class CalculatorGUI extends JFrame {
         nclear = new JButton("C");
         nfibonacci = new JButton("FIB");
         nrand = new JButton("Rand()");
+
+        histclear = new JButton("Clear History");
 
 
 
@@ -162,6 +176,7 @@ public class CalculatorGUI extends JFrame {
         controlPanel.add(nclear);
         controlPanel.add(nfibonacci);
         controlPanel.add(nrand);
+        mainCalcContainer.add(histclear);
 
         //Remove focus so we don't break the keyboard listener
         n1.setFocusable(false);
@@ -183,6 +198,7 @@ public class CalculatorGUI extends JFrame {
         nclear.setFocusable(false);
         nfibonacci.setFocusable(false);
         nrand.setFocusable(false);
+        histclear.setFocusable(false);
 
     }
 
@@ -285,7 +301,7 @@ public class CalculatorGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 mainText.setText("");
             }
-        }); 
+        });
         
         nequal.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -321,6 +337,13 @@ public class CalculatorGUI extends JFrame {
                     int index = list.locationToIndex(evt.getPoint());
                     loadFromHistoryItem(index);
                 }
+            }
+        });
+
+        histclear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                hist.clearHistory();
             }
         });
     }

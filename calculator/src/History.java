@@ -56,6 +56,16 @@ public class History {
         }
     }
 
+    public void clearHistory() {
+        data.clear();
+        try {
+            writeToDataFile();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ((DefaultListModel)p.getModel()).clear();
+    }
+
     public String getEntry(int index) {
         if (data.size()>=index) {
             String dataItem = data.get(index);
