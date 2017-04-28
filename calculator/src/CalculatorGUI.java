@@ -54,7 +54,7 @@ public class CalculatorGUI extends JFrame {
      */
     public CalculatorGUI(History _hist) {
         hist = _hist;
-        _hist.lsPointer(model, lshist);
+        _hist.setPointers(model, lshist);
 
         engine = new CalculationEngine(_hist);
 
@@ -62,6 +62,8 @@ public class CalculatorGUI extends JFrame {
         createCalculatorButtons();
         addButtonsEventHandlers();
         addKeyboardListeners();
+
+        hist.loadHistory();
     }
 
 
