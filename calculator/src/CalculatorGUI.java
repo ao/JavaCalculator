@@ -98,8 +98,8 @@ public class CalculatorGUI extends JFrame {
      */
     public void renderWindowComponents() {
         mainFrame = new JFrame("Calculator");
-        mainFrame.setSize(400,400);
-        mainFrame.setLayout(new GridLayout(2, 1));
+        mainFrame.setSize(600,400);
+        mainFrame.setLayout(new GridLayout(2, 2));
 
         mainFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
@@ -110,6 +110,10 @@ public class CalculatorGUI extends JFrame {
         controlPanel = new JPanel();
         controlPanel.setLayout(new GridLayout(0,4));
         mainFrame.add(controlPanel);
+
+        histPanel = new JPanel();
+        histPanel.setLayout(new GridLayout(2,2));
+        mainFrame.add(histPanel);
 
         mainFrame.setLocationRelativeTo(null);
 
@@ -141,8 +145,13 @@ public class CalculatorGUI extends JFrame {
         mainText.setText("0");
         mainText.setFont(myFontSize);
 
-        mainCalcContainer.add(lshist, BorderLayout.EAST);
         mainCalcContainer.add(mainText, BorderLayout.NORTH);
+
+        histclear = new JButton("Clear History");
+        lshist.add(histPanel, BorderLayout.EAST);
+        mainCalcContainer.add(lshist);
+
+
 
         // Initialise each jButton
         n1 = new JButton("1");
@@ -163,11 +172,9 @@ public class CalculatorGUI extends JFrame {
         nminus = new JButton("-");
         nclear = new JButton("C");
         nfibonacci = new JButton("FIB");
-        nrand = new JButton("R");
+        nrand = new JButton("Rand");
 
         histclear = new JButton("Clear History");
-
-
 
         // Add all buttons to the jPanel
         controlPanel.add(n7);
@@ -189,7 +196,8 @@ public class CalculatorGUI extends JFrame {
         controlPanel.add(nclear);
         controlPanel.add(nfibonacci);
         controlPanel.add(nrand);
-        mainCalcContainer.add(histclear);
+
+        histPanel.add(histclear);
 
         //Remove focus so we don't break the keyboard listener
         n1.setFocusable(false);
