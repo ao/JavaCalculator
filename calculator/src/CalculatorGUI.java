@@ -400,6 +400,8 @@ public class CalculatorGUI extends JFrame {
     
     private void loadFromHistoryItem(int index) {
         mainText.setText( hist.getEntry(index) );
+        hist.changeHistoryFile(histIndex);
+        
     }
 
     /**

@@ -91,4 +91,8 @@ public class History {
             e.printStackTrace();
         }
     }
+    
+    public void changeHistoryFile(int numToChange){
+        
+    }
 }
