@@ -52,6 +52,7 @@ public class CalculatorGUI extends JFrame {
     private JMenuItem helpMenuItem;
     private JMenuItem aboutMenuItem;
     
+    private int histIndex;
     /**
      * Constructor to control flow
      */
@@ -371,12 +372,12 @@ public class CalculatorGUI extends JFrame {
                 JList list = (JList)evt.getSource();
                 if (evt.getClickCount() == 2) {
                     // Double-click detected
-                    int index = list.locationToIndex(evt.getPoint());
-                    loadFromHistoryItem(index);
+                    histIndex = list.locationToIndex(evt.getPoint());
+                    loadFromHistoryItem(histIndex);
                 } else if (evt.getClickCount() == 3) {
                     // Triple-click detected
-                    int index = list.locationToIndex(evt.getPoint());
-                    loadFromHistoryItem(index);
+                    histIndex = list.locationToIndex(evt.getPoint());
+                    loadFromHistoryItem(histIndex);
                 }
             }
         });
