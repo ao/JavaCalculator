@@ -40,7 +40,7 @@ public class CalculationEngine implements Calculate {
             
     public BigInteger calculateFibonacciNow(int input){
         BigInteger fibo = new BigInteger("-1");
-        BigInteger num = new BigInteger("1");
+        BigInteger num = new BigInteger("0");
         BigInteger num2 = new BigInteger("1");
         System.out.println("Calculating fibo");
         try
@@ -53,7 +53,7 @@ public class CalculationEngine implements Calculate {
             }
             else if (input < 1000)
             {
-                for (int loop = 3; loop < input; loop ++)
+                for (int loop = 2; loop < input; loop ++)
                 {
                     fibo = num.add(num2);
                     num = num2;
