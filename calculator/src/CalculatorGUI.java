@@ -163,7 +163,7 @@ public class CalculatorGUI extends JFrame {
         nminus = new JButton("-");
         nclear = new JButton("C");
         nfibonacci = new JButton("FIB");
-        nrand = new JButton("Rand()");
+        nrand = new JButton("R");
 
         histclear = new JButton("Clear History");
 
