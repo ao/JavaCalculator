@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
-
+import java.math.BigInteger;
 /**
  * Draw Calculator GUI
  */
@@ -47,17 +47,16 @@ public class CalculatorGUI extends JFrame {
     private DefaultListModel model = new DefaultListModel();
     private JList lshist = new JList( model );
 
+    private JMenuBar menuBar;
+    private JMenu helpMenu;
+    private JMenuItem helpMenuItem;
+    private JMenuItem aboutMenuItem;
+    
     /**
      * Constructor to control flow
      */
     public CalculatorGUI(History _hist) {
         super("Calculator");
-
-        // take the menu bar off the jframe
-//        System.setProperty("apple.laf.useScreenMenuBar", "true");
-
-        // set the name of the application menu item
-//        System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Calculator");
 
         hist = _hist;
         _hist.setPointers(model, lshist);
@@ -81,9 +80,20 @@ public class CalculatorGUI extends JFrame {
         //TODO: Need to split this up into a list so that we can re-use it with the History code.
         String global = mainText.getText();
         global = global.concat(whatToAdd);
-        mainText.setText(global);        
+        mainText.setText(global);    
+        
     }
 
+    public void runfibo(){
+        GetInput gi = new GetInput();
+        int fibnr = gi.getnumber();
+
+        CalculationEngine ce = new CalculationEngine();
+        BigInteger fibanswer = ce.calculateFibonacciNow(fibnr);
+        
+        String stranswer = fibanswer.toString();
+        addToCalculationString(stranswer);        
+    }
     /**
      * Render Window Components
      */
@@ -102,6 +112,8 @@ public class CalculatorGUI extends JFrame {
         controlPanel.setLayout(new GridLayout(0,4));
         mainFrame.add(controlPanel);
         mainFrame.setVisible(true);
+        
+
     }
 
     /**
@@ -198,12 +210,39 @@ public class CalculatorGUI extends JFrame {
         nrand.setFocusable(false);
         histclear.setFocusable(false);
 
+        menuBar = new JMenuBar();
+        helpMenu = new JMenu("Help");
+
+        aboutMenuItem = new JMenuItem("About");
+        //aboutMenuItem.addActionListener(this);
+        helpMenu.add(aboutMenuItem); 
+
+        helpMenuItem = new JMenuItem("Help");
+        //helpMenuItem.addActionListener(this);
+        helpMenu.add(helpMenuItem);
+
+        menuBar.add(helpMenu);
+        mainFrame.setJMenuBar(menuBar);
     }
 
     /**
      * Add ActionListener events to all the buttons
      */
     public void addButtonsEventHandlers() {
+        helpMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                GetInput gi = new GetInput();
+                gi.showMessage("HELP", "The functions of the calculator should perform as a normal calculator. The Fib button returns the nth number in the Fibonacci sequence, where the user can input n", JOptionPane.OK_OPTION);
+            }
+        });
+        
+        aboutMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                GetInput gi = new GetInput();
+                gi.showMessage("About", "This program was developed by Andrew and Werner for our assignment in weeks 5 and 6", JOptionPane.OK_OPTION);
+            }
+        });
+        
         n1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 addToCalculationString(n1.getText());
@@ -344,8 +383,16 @@ public class CalculatorGUI extends JFrame {
                 hist.clearHistory();
             }
         });
+        
+        nfibonacci.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                runfibo();
+            }
+        });
     }
 
+    
     private void loadFromHistoryItem(int index) {
         mainText.setText( hist.getEntry(index) );
     }
