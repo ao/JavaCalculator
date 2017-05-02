@@ -12,7 +12,7 @@ public class GetInput {
     }
 
     
-    public int getnumber() {
+    public int getNumber() {
         int retVal = 0;
         JTextField field1 = new JTextField("1");
         JPanel panel = new JPanel(new GridLayout(0, 1));

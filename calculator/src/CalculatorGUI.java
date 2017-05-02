@@ -86,7 +86,7 @@ public class CalculatorGUI extends JFrame {
 
     public void runfibo(){
         GetInput gi = new GetInput();
-        int fibnr = gi.getnumber();
+        int fibnr = gi.getNumber();
 
         CalculationEngine ce = new CalculationEngine();
         BigInteger fibanswer = ce.calculateFibonacciNow(fibnr);
