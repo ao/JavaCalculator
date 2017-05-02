@@ -139,6 +139,7 @@ public class CalculatorGUI extends JFrame {
 
         mainText = new JTextField(100);
         Font myFontSize = mainText.getFont().deriveFont(Font.BOLD, 50f);
+        mainText.setText("0");
         mainText.setFont(myFontSize);
 
         mainCalcContainer.add(lshist, BorderLayout.EAST);
