@@ -78,11 +78,9 @@ public class CalculatorGUI extends JFrame {
      * @param whatToAdd
      */
     private void addToCalculationString(String whatToAdd){
-        //TODO: Need to split this up into a list so that we can re-use it with the History code.
         String global = mainText.getText();
         global = global.concat(whatToAdd);
-        mainText.setText(global);    
-        
+        mainText.setText(global);
     }
 
     public void runfibo(){
