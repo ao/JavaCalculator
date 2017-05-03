@@ -101,7 +101,7 @@ public class CalculatorGUI extends JFrame {
     public void renderWindowComponents() {
         mainFrame = new JFrame("Calculator");
         mainFrame.setSize(600,400);
-        mainFrame.setLayout(new GridLayout(2, 2));
+        mainFrame.setLayout(new GridLayout(2, 0));
 
         mainFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
@@ -111,17 +111,14 @@ public class CalculatorGUI extends JFrame {
 
         controlPanel = new JPanel();
         controlPanel.setLayout(new GridLayout(0,4));
-        mainFrame.add(controlPanel);
+        mainFrame.getContentPane().add(controlPanel);
 
         histPanel = new JPanel();
-        histPanel.setLayout(new GridLayout(2,2));
-        mainFrame.add(histPanel);
+        histPanel.setLayout(new GridLayout(0,1));
+        mainFrame.getContentPane().add(histPanel);
 
         mainFrame.setLocationRelativeTo(null);
-
         mainFrame.setVisible(true);
-        
-
     }
 
     /**
@@ -139,21 +136,6 @@ public class CalculatorGUI extends JFrame {
          | .  |  0  |  =  | -  |
          +---------------------+
          */
-
-        mainCalcContainer = mainFrame.getContentPane();
-
-        mainText = new JTextField(100);
-        Font myFontSize = mainText.getFont().deriveFont(Font.BOLD, 50f);
-        mainText.setText("0");
-        mainText.setFont(myFontSize);
-
-        mainCalcContainer.add(mainText, BorderLayout.NORTH);
-
-        histclear = new JButton("Clear History");
-        lshist.add(histPanel, BorderLayout.EAST);
-        mainCalcContainer.add(lshist);
-
-
 
         // Initialise each jButton
         n1 = new JButton("1");
@@ -175,9 +157,23 @@ public class CalculatorGUI extends JFrame {
         nclear = new JButton("C");
         nfibonacci = new JButton("FIB");
         nrand = new JButton("Rand");
-
         nsqrt = new JButton("Sqrt");
         histclear = new JButton("Clear History");
+
+        mainText = new JTextField(100);
+        Font myFontSize = mainText.getFont().deriveFont(Font.BOLD, 50f);
+        mainText.setCaretPosition(0);
+        mainText.setText("0");
+        mainText.setFont(myFontSize);
+
+        histPanel.add(lshist, BorderLayout.NORTH);
+        histPanel.add(histclear, BorderLayout.SOUTH);
+
+        mainFrame.getContentPane().add(mainText, BorderLayout.NORTH);
+        mainFrame.getContentPane().add(histPanel, BorderLayout.CENTER);
+        mainFrame.getContentPane().add(controlPanel,BorderLayout.SOUTH);
+        mainFrame.getContentPane().add(histclear, BorderLayout.CENTER);
+
 
         // Add all buttons to the jPanel
         controlPanel.add(n7);
@@ -199,8 +195,7 @@ public class CalculatorGUI extends JFrame {
         controlPanel.add(nclear);
         controlPanel.add(nfibonacci);
         controlPanel.add(nrand);
-
-        histPanel.add(histclear);
+        controlPanel.add(nsqrt);
 
         //Remove focus so we don't break the keyboard listener
         n1.setFocusable(false);
@@ -258,7 +253,7 @@ public class CalculatorGUI extends JFrame {
                 gi.showMessage("HELP", "The functions of the calculator should perform as a normal calculator. The Fib button returns the nth number in the Fibonacci sequence, where the user can input n", JOptionPane.OK_OPTION);
             }
         });
-        
+
         aboutMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 GetInput gi = new GetInput();
@@ -382,7 +377,6 @@ public class CalculatorGUI extends JFrame {
             }
         });
 
-        mainCalcContainer.add(controlPanel,BorderLayout.CENTER);
         nsqrt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
