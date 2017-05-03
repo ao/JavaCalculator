@@ -387,8 +387,11 @@ public class CalculatorGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String originalMainTextValue = mainText.getText();
                 Double sqrtValue = Math.sqrt( Double.valueOf(mainText.getText()) );
-                addToCalculationString( String.valueOf(sqrtValue) );
-                hist.addToHistory(String.valueOf(originalMainTextValue), String.valueOf(sqrtValue));
+                String s = String.format("%.3f", sqrtValue);
+                System.out.println(s);
+                
+                mainText.setText(s);
+                hist.addToHistory("Sqrt("+String.valueOf(originalMainTextValue)+")", s);
             }
         });
 
