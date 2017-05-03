@@ -49,7 +49,9 @@ public class CalculatorGUI extends JFrame {
     private JList lshist = new JList( model );
 
     private JMenuBar menuBar;
+    private JMenu fileMenu;
     private JMenu helpMenu;
+    private JMenuItem exitMenuItem;
     private JMenuItem helpMenuItem;
     private JMenuItem aboutMenuItem;
     
@@ -225,15 +227,18 @@ public class CalculatorGUI extends JFrame {
 
         menuBar = new JMenuBar();
         helpMenu = new JMenu("Help");
+        fileMenu = new JMenu("File");
+
+        exitMenuItem = new JMenuItem("Exit");
+        fileMenu.add(exitMenuItem);
 
         aboutMenuItem = new JMenuItem("About");
-        //aboutMenuItem.addActionListener(this);
-        helpMenu.add(aboutMenuItem); 
+        helpMenu.add(aboutMenuItem);
 
         helpMenuItem = new JMenuItem("Help");
-        //helpMenuItem.addActionListener(this);
         helpMenu.add(helpMenuItem);
 
+        menuBar.add(fileMenu);
         menuBar.add(helpMenu);
         mainFrame.setJMenuBar(menuBar);
     }
@@ -242,6 +247,12 @@ public class CalculatorGUI extends JFrame {
      * Add ActionListener events to all the buttons
      */
     public void addButtonsEventHandlers() {
+        exitMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
         helpMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 GetInput gi = new GetInput();
