@@ -41,6 +41,7 @@ public class CalculatorGUI extends JFrame {
     private JButton nclear;
     private JButton nfibonacci;
     private JButton nrand;
+    private JButton nsqrt;
 
     private JButton histclear;
 
@@ -174,6 +175,7 @@ public class CalculatorGUI extends JFrame {
         nfibonacci = new JButton("FIB");
         nrand = new JButton("Rand");
 
+        nsqrt = new JButton("Sqrt");
         histclear = new JButton("Clear History");
 
         // Add all buttons to the jPanel
@@ -371,6 +373,16 @@ public class CalculatorGUI extends JFrame {
         });
 
         mainCalcContainer.add(controlPanel,BorderLayout.CENTER);
+        nsqrt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String originalMainTextValue = mainText.getText();
+                Double sqrtValue = Math.sqrt( Double.valueOf(mainText.getText()) );
+                addToCalculationString( String.valueOf(sqrtValue) );
+                hist.addToHistory(String.valueOf(originalMainTextValue), String.valueOf(sqrtValue));
+            }
+        });
+
         mainFrame.setVisible(true);
 
         lshist.addMouseListener(new MouseAdapter() {
