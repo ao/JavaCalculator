@@ -17,6 +17,7 @@ public class History {
 
     private Object store;
     private DefaultListModel<String> m;
+    private boolean hasHistory = false;
     private JList<String> p;
     private List<String> data = new ArrayList<String>() {};
     private String historyFile = "history.dat";
@@ -32,6 +33,9 @@ public class History {
 
     public void addToHistory(String... strings) {
 
+        if (hasHistory==false) ((DefaultListModel)p.getModel()).clear();
+        addHistoryBlankItem(false);
+
         String str = String.join(",", strings);
 
         data.add(str);
@@ -45,6 +49,20 @@ public class History {
         }
     }
 
+    public void addHistoryBlankItem(boolean showBlankItem) {
+        if (showBlankItem) {
+            ((DefaultListModel)p.getModel()).clear();
+            hasHistory = false;
+            ((DefaultListModel)p.getModel()).addElement( "History is blank" );
+            p.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            p.setSelectionModel(new DisabledItemSelectionModel());
+            p.setEnabled(false);
+        } else {
+            hasHistory = true;
+            p.setEnabled(true);
+        }
+    }
+
     public void loadHistory() {
         try {
             openDataFile();
@@ -54,6 +72,8 @@ public class History {
         for (String str: data) {
             ((DefaultListModel)p.getModel()).addElement( str.replace(",", "=") );
         }
+
+        addHistoryBlankItem( (data.size()==0 ? true : false) );
     }
 
     public void clearHistory() {
@@ -64,6 +84,7 @@ public class History {
             e.printStackTrace();
         }
         ((DefaultListModel)p.getModel()).clear();
+        addHistoryBlankItem(true);
     }
 
     public String getEntry(int index) {
@@ -96,3 +117,4 @@ public class History {
         
     }
 }
+
