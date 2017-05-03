@@ -32,9 +32,12 @@ public class GetInput {
         if (result == JOptionPane.OK_OPTION) {
             try {
                 retVal = Integer.parseInt(field1.getText());
-            } catch(Exception e) {
-                showMessage("Invalid number","You have to input a valid number",JOptionPane.PLAIN_MESSAGE);
-                e.printStackTrace();
+            } catch (ArithmeticException e1) {
+                showMessage("Invalid number","You can not divide by zero", JOptionPane.PLAIN_MESSAGE);
+                e1.printStackTrace();
+            } catch (Exception e2) {
+                showMessage("Invalid number","You have to input a valid number", JOptionPane.PLAIN_MESSAGE);
+                e2.printStackTrace();
             }
             
         } else

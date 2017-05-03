@@ -46,6 +46,8 @@ public class History {
 
         try {
             writeToDataFile();
+        } catch (NullPointerException e1) {
+            e1.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,6 +82,8 @@ public class History {
             openDataFile();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e2) {
+            e2.printStackTrace();
         }
         for (String str: data) {
             ((DefaultListModel)p.getModel()).addElement( str.replace(",", "=") );
@@ -95,6 +99,8 @@ public class History {
         data.clear();
         try {
             writeToDataFile();
+        } catch (NullPointerException e1) {
+            e1.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -124,8 +130,10 @@ public class History {
     public void openDataFile() throws IOException {
         try {
             data = Files.readAllLines(Paths.get(historyFile));
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        } catch (Exception e2) {
+            e2.printStackTrace();
         }
     }
 
@@ -136,8 +144,10 @@ public class History {
     public void writeToDataFile() throws IOException {
         try {
             Files.write(Paths.get(historyFile), data);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        } catch (Exception e2) {
+            e2.printStackTrace();
         }
     }
 
