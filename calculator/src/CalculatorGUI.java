@@ -172,7 +172,6 @@ public class CalculatorGUI extends JFrame {
         mainText.setFont(myFontSize);
 
         histPanel.add(lshist, BorderLayout.NORTH);
-        histPanel.add(histclear, BorderLayout.SOUTH);
 
         mainFrame.getContentPane().add(mainText, BorderLayout.NORTH);
         mainFrame.getContentPane().add(histPanel, BorderLayout.CENTER);
