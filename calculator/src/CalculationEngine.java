@@ -39,35 +39,37 @@ public class CalculationEngine implements Calculate {
         }
     }
 
-            
+    /**
+     * Calculate the Fibonacci Sequence of a number
+     * @param input
+     * @return
+     */
     public BigInteger calculateFibonacciNow(int input){
         BigInteger fibo = new BigInteger("-1");
         BigInteger num = new BigInteger("0");
         BigInteger num2 = new BigInteger("1");
-        System.out.println("Calculating fibo");
-        try
-        {
+
+        //System.out.println("Calculating fibo");
+
+        try {
             if ((input < 0) || (input > 999)){
                 fibo = BigInteger.valueOf(-1);
-            }
-            else if (input < 3){
+            } else if (input < 3){
                 fibo = BigInteger.valueOf(1);
-            }
-            else if (input < 1000)
-            {
-                for (int loop = 2; loop < input; loop ++)
-                {
+            } else if (input < 1000) {
+                for (int loop = 2; loop < input; loop ++) {
                     fibo = num.add(num2);
                     num = num2;
                     num2 = fibo;
                 }            
             }            
-        }
-        catch(Exception e){
+        } catch (NullPointerException e1) {
+            e1.printStackTrace();
+        } catch(Exception e){
             e.printStackTrace();
         }
-        System.out.println(fibo);
-        return fibo; 
-        
+
+        //System.out.println(fibo);
+        return fibo;
     }    
 }
