@@ -90,8 +90,7 @@ public class CalculatorGUI extends JFrame {
         GetInput gi = new GetInput();
         int fibnr = gi.getNumber();
 
-        CalculationEngine ce = new CalculationEngine();
-        BigInteger fibanswer = ce.calculateFibonacciNow(fibnr);
+        BigInteger fibanswer = engine.calculateFibonacciNow(fibnr);
         
         String stranswer = fibanswer.toString();
         addToCalculationString(stranswer);        
