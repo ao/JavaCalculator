@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
 import java.math.BigInteger;
+
 /**
  * Draw Calculator GUI
  */
@@ -54,8 +55,10 @@ public class CalculatorGUI extends JFrame {
     private JMenuItem aboutMenuItem;
     
     private int histIndex;
+
     /**
      * Constructor to control flow
+     * @param _hist
      */
     public CalculatorGUI(History _hist) {
         super("Calculator");
@@ -84,6 +87,9 @@ public class CalculatorGUI extends JFrame {
         mainText.setText(global);
     }
 
+    /**
+     * Run Fibonacci
+     */
     public void runfibo(){
         GetInput gi = new GetInput();
         int fibnr = gi.getNumber();
@@ -93,6 +99,7 @@ public class CalculatorGUI extends JFrame {
         String stranswer = fibanswer.toString();
         addToCalculationString(stranswer);        
     }
+
     /**
      * Render Window Components
      */
@@ -417,7 +424,10 @@ public class CalculatorGUI extends JFrame {
         });
     }
 
-    
+    /**
+     * Load an item from the History list
+     * @param index
+     */
     private void loadFromHistoryItem(int index) {
         mainText.setText( hist.getEntry(index) );
         hist.changeHistoryFile(histIndex);
