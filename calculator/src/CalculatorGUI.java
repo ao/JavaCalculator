@@ -391,7 +391,7 @@ public class CalculatorGUI extends JFrame {
                 System.out.println(s);
                 
                 mainText.setText(s);
-                hist.addToHistory("Sqrt("+String.valueOf(originalMainTextValue)+")", s);
+                hist.addToHistory("Math.pow("+String.valueOf(originalMainTextValue)+",0.5)", s);
             }
         });
 
