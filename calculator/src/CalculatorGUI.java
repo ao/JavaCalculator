@@ -18,8 +18,6 @@ public class CalculatorGUI extends JFrame {
     private JPanel histPanel;
     private JTextField mainText;
 
-    private Container mainCalcContainer;
-
     private CalculationEngine engine;
 
     private JButton n1;
